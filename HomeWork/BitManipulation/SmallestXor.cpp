@@ -1,21 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(int A, int B)
+void solve(int A, int B)
 {
-    int setBits = __builtin_popcount(B);
-    int i = 1;
-    while (true)
+    //let x = a
+    long long x = A;
+    long long setBitsA = __builtin_popcountll(A);
+    cout << "set bits in A = " << setBitsA << " set bits in B = " << B << endl;
+    if (setBitsA < B)
     {
-        int x = A ^ i;
-        if (__builtin_popcount(x) == setBits)
-            break;
-        i++;
+        int i = 0;
+        // cout << (x & (1 << 3)) << endl;
+        // cout << (x | (1 << 2));
+        while (__builtin_popcountll(x) != B && i < 10)
+        {
+            if ((x & (1 << i)) == 0)
+            {
+                cout << x << endl;
+                x |= (1 << i);
+                cout << "x = " << x << " popcount x = " << __builtin_popcountll(x) << endl;
+            }
+            i++;
+        }
+        cout << x;
     }
-    return i;
+    else if (setBitsA > B)
+    {
+        // cout << "evide";
+        int i = 0;
+        cout << (x & (1 << 1)) << endl;
+        cout << (x & ~(1 << 0));
+        while (__builtin_popcountll(x) != B && i < 10)
+        {
+            if ((x & (1 << i)) != 0)
+            {
+                x &= ~(1 << i);
+                cout << "x = " << x << " popcount x = " << __builtin_popcountll(x) << endl;
+            }
+            i++;
+        }
+    }
 }
 
 int main()
 {
-    cout << solve(3, 3);
+    solve(4, 6);
 }

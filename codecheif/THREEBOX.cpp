@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 int main()
@@ -7,18 +8,26 @@ int main()
     cin >> t;
     while (t--)
     {
-        int a, b, c, d;
-        cin >> a >> b >> c >> d;
-        int sum = a + b + c;
+        int ar[3], d;
+        cin >> ar[0] >> ar[1] >> ar[2] >> d;
+        int sum = ar[0] + ar[1] + ar[2];
         if (sum <= d)
             cout << '1' << endl;
         else
         {
-            if (sum % d == 0)
-
-                cout << sum / d << endl;
-            else
-                cout << (sum / d) + 1 << endl;
+            sort(ar, ar + 3, greater<int>());
+            int count = 0;
+            if (ar[0] + ar[1] >= d)
+            {
+                if (ar[1] + ar[2] <= d)
+                {
+                    cout << "2" << endl;
+                }
+                if (ar[1] + ar[2] > d)
+                {
+                    cout << "3" << endl;
+                }
+            }
         }
     }
 }
